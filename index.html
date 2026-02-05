@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Valentine Surprise 💖</title>
+  <style>
+    :root { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background: radial-gradient(circle at top, #fff, #f3f4f6);
+      overflow: hidden;
+    }
+    .card {
+      width: min(520px, 92vw);
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.08);
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+    h1 { margin: 0 0 8px; font-size: 28px; }
+    p { margin: 0 0 18px; color: #4b5563; line-height: 1.45; }
+    .btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    button {
+      border: 0;
+      padding: 12px 16px;
+      border-radius: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform .08s ease, filter .15s ease;
+    }
+    button:active { transform: scale(.98); }
+    .yes { background: #16a34a; color: white; }
+    .no  { background: #ef4444; color: white; position: relative; }
+    .hint { font-size: 12px; color: #6b7280; margin-top: 12px; }
+
+    .nameBadge{
+      display:inline-block;
+      background:#111827;
+      color:#fff;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 14px;
+      margin-bottom: 10px;
+    }
+
+    /* Celebration overlay */
+    .overlay{
+      position: fixed;
+      inset: 0;
+      display: none;
+      place-items: center;
+      background: rgba(0,0,0,.35);
+      z-index: 5;
+      padding: 18px;
+    }
+    .modal{
+      width: min(560px, 92vw);
+      background: white;
+      border-radius: 22px;
+      padding: 22px;
+      text-align: center;
+      box-shadow: 0 18px 50px rgba(0,0,0,.18);
+    }
+    .yay{
+      font-size: 38px;
+      font-weight: 900;
+      margin: 6px 0 10px;
+    }
+    .imgWrap{
+      border: 1px solid #e5e7eb;
+      border-radius: 18px;
+      padding: 10px;
+      background: #fff;
+    }
+    canvas.confetti {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 10;
+    }
+  </style>
+</head>
+<body>
+  <canvas class="confetti" id="confetti"></canvas>
+
+  <div class="card">
+    <div class="nameBadge">For Swathi 💖</div>
+    <h1 id="title">Will you be my Valentine? 💖</h1>
+    <p id="msg">I promise no bugs. Only hugs.</p>
+
+    <div class="btns">
+      <button class="yes" id="yesBtn">Yes ✅</button>
+      <button class="no" id="noBtn">No 🙃</button>
+    </div>
+
+    <div class="hint" id="hint">Tip: Try clicking “No” 😄</div>
+  </div>
+
+  <!-- Celebration (shows after YES) -->
+  <div class="overlay" id="overlay">
+    <div class="modal">
+      <div class="yay">YAY, Swathi!!! 🥳💖</div>
+      <p style="margin-top:0;color:#4b5563;">You just made me super happy!</p>
+
+      <!-- Simple “YAY” celebration image (inline SVG so it always works) -->
+      <div class="imgWrap" aria-label="Yay celebration image">
+        <svg viewBox="0 0 800 420" width="100%" height="auto" role="img">
+          <defs>
+            <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#fde68a"/>
+              <stop offset="0.5" stop-color="#fbcfe8"/>
+              <stop offset="1" stop-color="#93c5fd"/>
+            </linearGradient>
+            <filter id="sh" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="10" stdDeviation="10" flood-color="#000" flood-opacity="0.14"/>
+            </filter>
+          </defs>
+
+          <rect width="800" height="420" rx="32" fill="url(#bg)"/>
+
+          <!-- confetti dots -->
+          <g opacity="0.9">
+            <circle cx="90" cy="70" r="10" fill="#22c55e"/>
+            <circle cx="140" cy="120" r="8" fill="#ef4444"/>
+            <circle cx="720" cy="90" r="10" fill="#3b82f6"/>
+            <circle cx="660" cy="150" r="8" fill="#a855f7"/>
+            <circle cx="120" cy="320" r="10" fill="#f59e0b"/>
+            <circle cx="700" cy="330" r="10" fill="#fb7185"/>
+          </g>
+
+          <!-- big YAY -->
+          <g filter="url(#sh)">
+            <text x="400" y="190" text-anchor="middle"
+                  font-size="120" font-weight="900" fill="#111827">
+              YAY!
+            </text>
+          </g>
+
+          <text x="400" y="265" text-anchor="middle"
+                font-size="34" font-weight="800" fill="#111827" opacity="0.85">
+            Happy Valentine’s 💖
+          </text>
+
+          <!-- balloons -->
+          <g filter="url(#sh)">
+            <circle cx="180" cy="220" r="40" fill="#fb7185"/>
+            <circle cx="620" cy="220" r="40" fill="#22c55e"/>
+            <path d="M180 260 C170 310, 160 340, 150 370" stroke="#111827" stroke-width="5" fill="none" opacity="0.6"/>
+            <path d="M620 260 C630 310, 640 340, 650 370" stroke="#111827" stroke-width="5" fill="none" opacity="0.6"/>
+          </g>
+        </svg>
+      </div>
+
+      <p style="margin:12px 0 0;color:#6b7280;font-size:12px;">(Tap anywhere to close)</p>
+    </div>
+  </div>
+
+  <script>
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn  = document.getElementById("noBtn");
+    const overlay = document.getElementById("overlay");
+    const hint = document.getElementById("hint");
+
+    // "No" button runs away
+    const moveNo = () => {
+      const pad = 16;
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      const rect = noBtn.getBoundingClientRect();
+
+      const maxX = vw - rect.width - pad;
+      const maxY = vh - rect.height - pad;
+
+      const x = Math.max(pad, Math.random() * maxX);
+      const y = Math.max(pad, Math.random() * maxY);
+
+      noBtn.style.position = "fixed";
+      noBtn.style.left = `${x}px`;
+      noBtn.style.top  = `${y}px`;
+
+      hint.textContent = "Hehe 😄 try YES ✅";
+    };
+
+    noBtn.addEventListener("mouseenter", moveNo);
+    noBtn.addEventListener("click", moveNo);
+
+    // Confetti (no libraries)
+    const canvas = document.getElementById("confetti");
+    const ctx = canvas.getContext("2d");
+    let W, H;
+
+    const resize = () => {
+      W = canvas.width = window.innerWidth;
+      H = canvas.height = window.innerHeight;
+    };
+    window.addEventListener("resize", resize);
+    resize();
+
+    function burstConfetti() {
+      const pieces = Array.from({ length: 220 }, () => ({
+        x: W / 2,
+        y: H / 3,
+        vx: (Math.random() - 0.5) * 10,
+        vy: Math.random() * -12 - 4,
+        g: 0.25 + Math.random() * 0.2,
+        s: 4 + Math.random() * 5,
+        r: Math.random() * Math.PI,
+        vr: (Math.random() - 0.5) * 0.2,
+        life: 0
+      }));
+
+      let running = true;
+      function frame() {
+        if (!running) return;
+        ctx.clearRect(0, 0, W, H);
+
+        for (const p of pieces) {
+          p.life++;
+          p.vy += p.g;
+          p.x += p.vx;
+          p.y += p.vy;
+          p.r += p.vr;
+
+          const palette = ["#ef4444","#f59e0b","#22c55e","#3b82f6","#a855f7","#ec4899"];
+          const color = palette[p.life % palette.length];
+
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate(p.r);
+          ctx.fillStyle = color;
+          ctx.fillRect(-p.s/2, -p.s/2, p.s, p.s);
+          ctx.restore();
+        }
+
+        if (pieces[0].life < 180) requestAnimationFrame(frame);
+        else { running = false; ctx.clearRect(0,0,W,H); }
+      }
+      requestAnimationFrame(frame);
+    }
+
+    // YES shows celebration image + confetti
+    yesBtn.addEventListener("click", () => {
+      overlay.style.display = "grid";
+      burstConfetti();
+      setTimeout(burstConfetti, 450);
+      noBtn.disabled = true;
+      noBtn.style.filter = "grayscale(1)";
+    });
+
+    // Close celebration when tapping anywhere on overlay
+    overlay.addEventListener("click", () => {
+      overlay.style.display = "none";
+    });
+  </script>
+</body>
+</html>
